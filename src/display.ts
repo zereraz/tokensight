@@ -92,7 +92,7 @@ export function showMonthlyQuota(quota: QuotaLimit): void {
     `   ${quota.currentValue} / ${quota.usage} times (${quota.percentage}%)`
   );
   console.log(
-    `   ${quota.remaining} times remaining (Resets on 1st of month)\n`
+    `   ${quota.remaining} times remaining\n`
   );
 
   console.log(
