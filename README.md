@@ -1,120 +1,125 @@
 # tokensight
 
-CLI tool to track your GLM Coding Plan usage by querying Z.ai's official APIs.
-
-## Features
-
-- Real-time usage data from Z.ai APIs
-- Subscription info (renewal date, billing cycle)
-- 5-hour rolling quota (token usage)
-- Monthly quota (web search/reader/zread)
-- Today's usage with hourly breakdown
-- N-day historical summaries
+Track your Z.ai GLM Coding Plan usage directly in Claude Code.
 
 ## Installation
 
-```bash
-# Clone or navigate to the project
-cd ~/Code/Zereraz/zai-tracker
+Inside a Claude Code instance, run the following commands:
 
-# Build the CLI
-bun run build
-
-# Add to PATH (optional)
-echo 'export PATH="$PATH:$HOME/Code/Zereraz/zai-tracker/dist"' >> ~/.zshrc
-source ~/.zshrc
+**Step 1: Add the marketplace**
+```
+/plugin marketplace add zereraz/tokensight
 ```
 
-## Quick Start
-
-```bash
-# 1. Set up authentication
-zai auth "your_token"
-
-# 2. Check your usage
-zai              # Show subscription and quota
-zai today        # Show today's hourly breakdown
-zai 7d           # Show last 7 days
+**Step 2: Install the plugin**
 ```
+/plugin install tokensight
+```
+
+**Step 3: Set up authentication**
+```
+/tokensight auth <your_token>
+```
+
+Done! You can now check your usage anytime.
+
+---
+
+## What is tokensight?
+
+tokensight gives you visibility into your Z.ai GLM Coding Plan usage.
+
+| What You See | Why It Matters |
+|--------------|----------------|
+| Subscription status | Know when your plan renews and billing cycle |
+| 5-hour token quota | Track your rolling token usage with reset countdown |
+| Monthly quota | Monitor web search/reader/zread tool usage |
+| Hourly breakdown | See usage patterns throughout the day |
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `zai` | Show usage status (default) |
-| `zai status` | Show subscription and current quota |
-| `zai today` | Show today's usage with hourly breakdown |
-| `zai 7d` / `zai 30d` | Show N-day summary |
-| `zai auth <token>` | Save API token |
-| `zai reset` | Clear saved token |
-| `zai help` | Show help |
+| `/tokensight` | Show subscription and quota overview |
+| `/tokensight today` | Hourly breakdown for today |
+| `/tokensight 7d` | 7-day summary |
+| `/tokensight 30d` | 30-day summary |
+| `/tokensight auth <token>` | Save authentication token |
+| `/tokensight:statusline` | Enable always-visible statusLine (shows token quota) |
+
+## StatusLine Mode
+
+For always-visible token quota, enable the statusLine:
+
+```
+/tokensight:statusline
+```
+
+This displays a compact HUD that updates every few seconds:
+
+```
+[Z.ai] ███████░░ 45% 110M left  ↺ 1h 30m
+Monthly 14/1000 986 left
+```
+
+### Integration with claude-hud
+
+If you already have claude-hud installed, running `/tokensight:statusline` will automatically detect it and create a combined statusLine that shows both:
+- **claude-hud**: context, tools, agents, todos (lines 1-4)
+- **tokensight**: token quota, monthly quota (lines 5-6)
+
+Both renderers use the same ANSI color scheme for consistency.
 
 ## Authentication
 
-The API token is stored in `~/.tokensight.json`.
+Get your token from Z.ai:
 
-### Getting your token:
-
-1. Go to https://z.ai/manage-apikey/subscription
+1. Open https://z.ai/manage-apikey/subscription
 2. Open DevTools (F12) → Application → Local Storage
-3. Click https://z.ai
-4. Find `z-ai-open-platform-token-production`
-5. Copy the token value
-6. Run: `zai auth "paste_token_here"`
+3. Find `z-ai-open-platform-token-production`
+4. Copy the token value (starts with `eyJhbGci`)
+5. Run: `/tokensight auth <paste_token>`
 
-The token should start with: `eyJhbGciOiJIUzUxMiJ9...`
+Token is stored locally in `~/.tokensight.json`.
 
-## Output Example
+## Example Output
 
 ```
 ╔════════════════════════════════════════════════════════════╗
 ║           Z.ai GLM Coding Plan Usage Tracker               ║
 ╚════════════════════════════════════════════════════════════╝
 
-📦 Subscription: GLM Coding Pro
+Subscription: GLM Coding Pro
    Status: VALID
    Renews in: 83 days (2026-03-28)
-   Billing: quarterly @ $36.45
 
-📊 5-Hour Quota (Model Calls):
-   40.7M / 200.0M tokens
-   159.3M tokens remaining (20%)
-   Resets in: 40m
+5-Hour Quota:
+   25.6M / 200M tokens (12%)
+   174.4M remaining
+   Resets in: 1h 49m
 
-   🟢 [██████░░░░░░░░░░░░░░░░░░░░░░░░] 20%
-
-📊 Monthly Quota (Web Search/Reader/Zread):
-   11 / 1000 times (1%)
-   989 times remaining (Resets on 1st of month)
-
-   🟢 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 1%
-
-   Tool breakdown:
-   - search-prime: 4 calls
-   - web-reader: 7 calls
-   - zread: 0 calls
+Monthly Quota:
+   8 / 1000 calls (1%)
+   992 remaining
 ```
 
-## Project Structure
+## How It Works
 
-```
-src/
-├── index.ts      # CLI entry point
-├── config.ts     # Configuration management
-├── api.ts        # Z.ai API client
-└── display.ts    # Output formatting
-```
+1. Plugin calls bundled CLI via Node.js
+2. CLI reads token from `~/.tokensight.json`
+3. Makes authenticated requests to Z.ai APIs
+4. Displays formatted results in Claude Code
 
-## API Endpoints Used
+## Privacy
 
-- `/api/biz/subscription/list` - Subscription info
-- `/api/monitor/usage/quota/limit` - Current quota limits
-- `/api/monitor/usage/model-usage` - Hourly usage data
-
-## Data Storage
-
-- Config: `~/.tokensight.json`
+- All data stays local
+- API calls only to your own Z.ai account
+- No telemetry or data collection
 
 ## License
 
 MIT
+
+---
+
+This project was 100% built with Z.ai GLM 4.7. Inspired by [claude-hud](https://github.com/jarrodwatts/claude-hud).
