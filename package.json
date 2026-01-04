@@ -1,0 +1,22 @@
+{
+  "name": "zai-tracker",
+  "version": "1.0.0",
+  "description": "CLI tool to track Z.ai GLM Coding Plan usage",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "zai": "dist/index.js"
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target bun && chmod +x dist/index.js",
+    "dev": "bun run src/index.ts",
+    "test": "bun run src/index.ts status"
+  },
+  "keywords": ["zai", "glm", "coding-plan", "usage", "tracker"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
