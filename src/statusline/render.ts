@@ -46,7 +46,7 @@ export function renderMonthlyQuotaLine(ctx: StatusLineContext): string | null {
   const percent = quota.percentage;
 
   const parts: string[] = [
-    dim("Web"),
+    dim("Monthly"),
     `${getQuotaColor(percent)}${quota.currentValue}/${quota.usage}${RESET}`,
     dim(`${quota.remaining} left`),
   ];
@@ -67,9 +67,9 @@ export function renderStatusLine(ctx: StatusLineContext): void {
     lines.push(monthlyLine);
   }
 
-  // Output each line with non-breaking spaces (like claude-hud)
-  for (const line of lines) {
-    const outputLine = `${RESET}${line.replace(/ /g, "\u00A0")}`;
+  // Join all lines with | separator and output as single line
+  if (lines.length > 0) {
+    const outputLine = `${RESET}${lines.join(" | ").replace(/ /g, "\u00A0")}`;
     console.log(outputLine);
   }
 }
