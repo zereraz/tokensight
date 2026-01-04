@@ -25,3 +25,9 @@ Available commands:
 - (none) or "status" - Subscription and quota overview
 - "today" - Hourly breakdown
 - "7d" or "30d" - N-day summary
+
+## To Uninstall:
+
+Run `/tokensight:uninstall` first to clean up the statusLine, then run `/plugin uninstall tokensight`.
+
+The uninstall command removes tokensight from your statusLine configuration to prevent broken commands.

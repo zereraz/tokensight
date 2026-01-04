@@ -30,7 +30,7 @@ Create a **combined command** that runs both renderers:
 
 This will display:
 - Lines 1-4: claude-hud (context, tools, agents, todos)
-- Lines 5-6: tokensight (token quota, monthly quota)
+- Line 5: tokensight (token quota + monthly quota on single line)
 
 ### If no statusLine exists:
 
