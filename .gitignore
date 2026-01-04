@@ -6,3 +6,4 @@ dist/
 .DS_Store
 .tokensight.json
 .zai-tracker.json
+research/claude-hud
