@@ -23,7 +23,7 @@ Create a **combined command** that runs both renderers:
 {
   "statusLine": {
     "type": "command",
-    "command": "bash -c 'node \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/dist/index.js 2>/dev/null | head -1)\" && node \"$(ls -td ~/.claude/plugins/cache/tokensight/tokensight/*/dist/statusline.js 2>/dev/null | head -1)\"'"
+    "command": "bash -c 'node \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/dist/index.js 2>/dev/null | head -1)\"; TOKENSIGHT=\"$(ls -td ~/.claude/plugins/cache/tokensight/tokensight/*/dist/statusline.js 2>/dev/null | head -1)\"; [ -n \"$TOKENSIGHT\" ] && node \"$TOKENSIGHT\" || true'"
   }
 }
 ```
