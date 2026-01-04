@@ -46,7 +46,7 @@ export function renderMonthlyQuotaLine(ctx: StatusLineContext): string | null {
   const percent = quota.percentage;
 
   const parts: string[] = [
-    dim("Monthly"),
+    dim("Web"),
     `${getQuotaColor(percent)}${quota.currentValue}/${quota.usage}${RESET}`,
     dim(`${quota.remaining} left`),
   ];

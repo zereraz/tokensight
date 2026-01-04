@@ -87,7 +87,7 @@ export function showTokenQuota(quota: QuotaLimit): void {
 }
 
 export function showMonthlyQuota(quota: QuotaLimit): void {
-  console.log(`📊 Monthly Quota (Web Search/Reader/Zread):`);
+  console.log(`📊 Web Tools Quota (Search/Reader/Zread):`);
   console.log(
     `   ${quota.currentValue} / ${quota.usage} times (${quota.percentage}%)`
   );
