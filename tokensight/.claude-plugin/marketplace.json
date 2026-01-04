@@ -1,0 +1,20 @@
+{
+  "name": "tokensight",
+  "owner": {
+    "name": "Sahebjot Singh",
+    "email": "sahebjot94@gmail.com"
+  },
+  "metadata": {
+    "description": "Track Z.ai GLM Coding Plan usage - subscription status, token quota, and hourly breakdown",
+    "version": "0.0.2"
+  },
+  "plugins": [
+    {
+      "name": "tokensight",
+      "source": ".",
+      "description": "Track your Z.ai GLM Coding Plan usage - shows subscription status, 5-hour rolling token quota, and hourly usage breakdown",
+      "category": "monitoring",
+      "tags": ["zai", "usage", "monitoring", "quota", "tokens", "glm"]
+    }
+  ]
+}

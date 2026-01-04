@@ -32,7 +32,7 @@ async function getToken(): Promise<string> {
     console.log(`  3. Click https://z.ai`);
     console.log(`  4. Find: z-ai-open-platform-token-production`);
     console.log(`  5. Copy the token value\n`);
-    console.log(`Save it with: zai auth <your_token>\n`);
+    console.log(`Paste your token in the chat: /tokensight auth <your_token>\n`);
     throw new Error("No token found in config.");
   }
 

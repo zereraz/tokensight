@@ -1,0 +1,13 @@
+{
+  "name": "tokensight",
+  "description": "Track your Z.ai GLM Coding Plan usage - subscription status, token quota, and hourly breakdown",
+  "version": "0.0.2",
+  "author": {
+    "name": "Sahebjot Singh",
+    "url": "https://github.com/zereraz"
+  },
+  "homepage": "https://github.com/zereraz/tokensight",
+  "repository": "https://github.com/zereraz/tokensight",
+  "license": "MIT",
+  "keywords": ["zai", "usage", "monitoring", "quota", "tokens", "glm", "statusline"]
+}

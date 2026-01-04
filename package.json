@@ -8,9 +8,12 @@
     "zai": "dist/index.js"
   },
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --target bun && chmod +x dist/index.js",
+    "build": "bun run build:node && bun run build:statusline && cp dist/index.js tokensight/dist/index.js && cp dist/statusline.js tokensight/dist/statusline.js",
+    "build:node": "bun build src/index.ts --outfile dist/index.js --target node && chmod +x dist/index.js",
+    "build:statusline": "bun build src/statusline/index.ts --outfile dist/statusline.js --target node && chmod +x dist/statusline.js",
     "dev": "bun run src/index.ts",
-    "test": "bun run src/index.ts status"
+    "test": "node --test tests/*.test.js",
+    "test:coverage": "node --test --experimental-test-coverage tests/*.test.js"
   },
   "keywords": ["zai", "glm", "coding-plan", "usage", "tracker"],
   "author": "",
