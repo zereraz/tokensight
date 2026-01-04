@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "tokensight",
-      "source": ".",
+      "source": "./",
       "description": "Track your Z.ai GLM Coding Plan usage - shows subscription status, 5-hour rolling token quota, and hourly usage breakdown",
       "category": "monitoring",
       "tags": ["zai", "usage", "monitoring", "quota", "tokens", "glm"]
