@@ -7,3 +7,4 @@ dist/
 .tokensight.json
 .zai-tracker.json
 research/claude-hud
+verify-auth.ts
