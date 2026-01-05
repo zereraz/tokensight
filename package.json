@@ -8,6 +8,7 @@
     "zai": "dist/index.js"
   },
   "scripts": {
+    "prepare": "bun run build",
     "build": "bun run build:node && bun run build:statusline",
     "build:node": "bun build src/index.ts --outfile dist/index.js --target node && chmod +x dist/index.js",
     "build:statusline": "bun build src/statusline/index.ts --outfile dist/statusline.js --target node && chmod +x dist/statusline.js",
