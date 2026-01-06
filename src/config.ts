@@ -4,6 +4,7 @@ import { homedir } from "os";
 
 export interface TokensightConfig {
   cookie?: string;
+  starPrompted?: boolean;
 }
 
 const CONFIG_PATH = join(homedir(), ".tokensight.json");

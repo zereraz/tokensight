@@ -68,8 +68,20 @@ The statusLine:
 
 The statusLine appears immediately - no restart needed.
 
-After successful setup, ask the user if they'd like to star the repository to support the project.
+## Step 4: Verify With User
 
-If they agree, run: `gh api -X PUT /user/starred/zereraz/tokensight`
+After successful setup, check if we should ask about starring:
 
-Only run the star command if they explicitly say yes.
+1. Read ~/.tokensight.json and check if `starPrompted` exists and is true
+2. Only ask if `starPrompted` is not true
+
+If prompt is needed, use AskUserQuestion:
+- Question: "Would you like to ⭐ star the tokensight repository on GitHub to support the project?"
+- Options: "Yes, star it" / "No thanks" / "Already starred"
+
+Only ask once per session (track this in memory, not persisted).
+
+After getting a response:
+- If they say "Yes, star it": run `gh api -X PUT /user/starred/zereraz/tokensight`, then save `"starPrompted": true` to ~/.tokensight.json
+- If they say "No thanks": do NOT save anything (may ask again in a future session)
+- If they say "Already starred": save `"starPrompted": true` to ~/.tokensight.json (don't run gh command)
