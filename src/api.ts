@@ -15,9 +15,9 @@ export interface QuotaLimit {
   type: string;
   unit: number;
   number: number;
-  usage: number;
-  currentValue: number;
-  remaining: number;
+  usage?: number;
+  currentValue?: number;
+  remaining?: number;
   percentage: number;
   usageDetails?: Array<{ modelCode: string; usage: number }>;
   nextResetTime?: number;
