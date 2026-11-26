@@ -73,6 +73,22 @@ export function showTokenQuota(quota: QuotaLimit): void {
     : "unknown";
 
   console.log(`📊 5-Hour Quota (Model Calls):`);
+
+  if (
+    quota.currentValue === undefined ||
+    quota.usage === undefined ||
+    quota.remaining === undefined
+  ) {
+    console.log(
+      `   ${quota.percentage}% of window used (counts not reported by Z.ai)`
+    );
+    console.log(`   Resets in: ${resetIn}`);
+    console.log(
+      `   ${getEmoji(quota.percentage)} ${getBar(quota.percentage)} ${quota.percentage}%\n`
+    );
+    return;
+  }
+
   console.log(
     `   ${formatTokens(quota.currentValue)} / ${formatTokens(quota.usage)} tokens`
   );

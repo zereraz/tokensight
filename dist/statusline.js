@@ -111,9 +111,11 @@ function renderTokenQuotaLine(ctx) {
   const resetIn = quota.nextResetTime ? formatTimeRemaining(quota.nextResetTime - Date.now()) : "";
   const parts = [
     cyan("[Z.ai]"),
-    `${bar} ${getQuotaColor(percent)}${percent}%${RESET}`,
-    dim(`${formatTokens(quota.remaining)} left`)
+    `${bar} ${getQuotaColor(percent)}${percent}%${RESET}`
   ];
+  if (quota.remaining !== undefined) {
+    parts.push(dim(`${formatTokens(quota.remaining)} left`));
+  }
   if (resetIn) {
     parts.push(dim(`↺ ${resetIn}`));
   }

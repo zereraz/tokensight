@@ -128,6 +128,12 @@ function showSubscription(sub) {
 function showTokenQuota(quota) {
   const resetIn = quota.nextResetTime ? formatTimeRemaining(quota.nextResetTime - Date.now()) : "unknown";
   console.log(`\uD83D\uDCCA 5-Hour Quota (Model Calls):`);
+  if (quota.currentValue === undefined || quota.usage === undefined || quota.remaining === undefined) {
+    console.log(`   ${quota.percentage}% of window used (counts not reported by Z.ai)`);
+    console.log(`   Resets in: ${resetIn}`);
+    console.log(`   ${getEmoji(quota.percentage)} ${getBar(quota.percentage)} ${quota.percentage}%`);
+    return;
+  }
   console.log(`   ${formatTokens(quota.currentValue)} / ${formatTokens(quota.usage)} tokens`);
   console.log(`   ${formatTokens(quota.remaining)} tokens remaining (${quota.percentage}%)`);
   console.log(`   Resets in: ${resetIn}
